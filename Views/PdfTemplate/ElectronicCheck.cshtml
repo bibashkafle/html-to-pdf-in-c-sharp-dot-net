@@ -1,0 +1,134 @@
+﻿@model ElectronicCheckViewModel
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    table, th, td {
+        border: 0px solid black;
+    }
+
+        table.check {
+            width: 100%;
+            background: #fff;
+            border: 0px solid red;
+            border-collapse: collapse;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+        }
+
+    td {
+        padding: 5px;
+    }
+
+    #dtAmt {
+        margin-top: 5px;
+    }
+
+    #checkNumber {
+        margin-left: 70%;
+    }
+
+    #checkDate {
+        margin-left: 65%;
+    }
+
+    #amountNumber {
+        margin-left: 12%;
+    }
+
+    #amountInWord {
+        margin-left: 4%;
+    }
+
+    #payee {
+        margin-left: 6%;
+        min-height: 50px;
+        overflow: hidden;
+    }
+
+    #memo {
+        margin-left: 1%;
+        margin-top: 10px;
+    }
+
+    .check-color {
+        color: black;
+    }
+</style>
+
+<table class="check check-color">
+
+    <tr>
+        <td>
+            <div id="checkNumber">@Model.CheckNumber</div>
+        </td>
+    </tr>
+
+    <tr><td> &nbsp;</td></tr>
+    <tr>
+        <td>
+            <div id="dtAmt">
+                <span id="checkDate">@Model.Date</span>
+                <span id="amountNumber"> @Model.AmountInNumber</span>
+            </div>
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td>
+            <div id="amountInWord">@Model.AmountInWord</div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <div id="payee">
+                <span id="PayeeName">@Model.Payee</span> <br />
+                @if (!string.IsNullOrWhiteSpace(Model.PayeeAddressLine1))
+                {
+                    <span id="PayeeAddressLine1"> @Model.PayeeAddressLine1 </span>                
+                    <br />
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.PayeeAddressLine2))
+                {
+                    <span id="PayeeAddressLine2"> @Model.PayeeAddressLine2 </span>
+                    <br />
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.PayeeAddressCity))
+                {
+                    <span id="PayeeAddressCity">@Model.PayeeAddressCity, </span>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.PayeeAddressState))
+                {
+                    <span id="PayeeAddressState">@Model.PayeeAddressState </span>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.PayeeAddressZip))
+                {
+                    <span id="PayeeAddressZip">@Model.PayeeAddressZip</span>
+                }                
+               <br />
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <div id="memo">@Model.Memo</div>
+        </td>
+    </tr>
+</table>
+
