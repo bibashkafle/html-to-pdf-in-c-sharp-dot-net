@@ -51,14 +51,18 @@ namespace htmlToPdf.Controllers
         [HttpGet]
         public async Task<ActionResult> OpenElectronicCheckAsPDF()
         {
-            var obj = new ElectronicCheckViewModel(DateTime.UtcNow.Ticks.ToString(), DateTime.UtcNow.ToString("dd-MMM-yyyy"), "John Doe", "2436 Main Street",
-                "", "Springfield", "IL", "62704", "Two Thousand Three Hundred Dollors And 00 cents", "2300.00", "Floor repair Young");
-            //string html = await _viewRenderer.RenderViewToStringAsync("RenderViewAsString", obj);
+            var obj = new ElectronicCheckViewModel(DateTime.UtcNow.Ticks.ToString(), DateTime.UtcNow.ToString("dd-MMM-yyyy"),
+                "John Doe", "2436 Main Street","", "Springfield", "IL", "62704", "Two Thousand Three Hundred Dollors And 00 cents",
+                "2300.00", "Floor repair Young");
+
+            // Render Razor View To String HTML 
             string html = await _viewRenderer.RenderViewToStringAsync("~/Views/PdfTemplate/ElectronicCheck.cshtml", obj);
 
+            //Download chromium executable
             await new BrowserFetcher().DownloadAsync();
             using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
             using var page = await browser.NewPageAsync();
+
             await page.SetContentAsync(html);
 
             var pdfStream = await page.PdfStreamAsync(new PdfOptions{
