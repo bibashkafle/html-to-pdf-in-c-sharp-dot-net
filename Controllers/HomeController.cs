@@ -44,7 +44,7 @@ namespace htmlToPdf.Controllers
         {
             var obj = new ElectronicCheckViewModel(DateTime.UtcNow.Ticks.ToString(), DateTime.UtcNow.ToString("dd-MMM-yyyy"), "John Doe", "2436 Main Street",
                  "", "Springfield", "IL", "62704", "Two Thousand Three Hundred Dollors And 00 cents", "2300.00", "Floor repair Young");
-            return View("~/Views/PdfTemplate/ElectronicCheck.cshtml", obj);
+            return View(obj);
         }
 
 
